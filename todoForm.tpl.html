@@ -1,0 +1,13 @@
+<form name = "todoForm" ng-submit="add(newTodoTitle)">
+  <div class="input-group">
+    <input type="text" class="form-control" aria-label="..." ng-model="newTodoTitle" placeholder="please input newTodoTitle..." autofocus minlength="3">
+    <span class="input-group-btn">
+      <button class="btn btn-success" type="submit">add</button>
+    </span>
+  </div>
+  <div ng-show="todoForm.$dirty && todoForm.$invalid">
+    <div class="alert alert-warning" role="alert">Please enter at least 3 characters.</div>
+  </div>
+</form>
+  
+<!--<pre>{{todoForm | json}}</pre>-->

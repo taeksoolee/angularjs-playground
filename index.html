@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link data-require="bootstrap@3.3.6" data-semver="3.3.6" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <script data-require="bootstrap@3.3.6" data-semver="3.3.6" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script data-require="angular.js@1.5.7" data-semver="1.5.7" src="https://code.angularjs.org/1.5.7/angular.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <script src="app.js"></script>
+    <script src="directives.js"></script>
+    <script src="controller.js"></script>
+    <script src="services.js"></script>
+  </head>
+
+  <body ng-app="todo" ng-controller="TodoCtrl">
+    <div class="container">
+    
+    <todo-title></todo-title>
+
+    <todo-form></todo-form>
+    
+    <todo-filter></todo-filter>
+    <hr>
+    <ul class="list-unstyled">
+      <li ng-repeat="todo in todos | filter: statusFilter">
+          <todo-item></todo-item>
+      </li>
+    </ul>
+    </div>
+    
+  </body>
+
+</html>
