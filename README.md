@@ -1,4 +1,4 @@
-# Todo-list / http://teaksoolee.github.io/todolist.
+# Todo-list / https://taeksoolee.github.io/todolist/.
 html, css, javascript_angularjs
 <br>
 vscode
