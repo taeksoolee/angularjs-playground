@@ -1,4 +1,6 @@
 # Todo-list / https://taeksoolee.github.io/todolist/.
-html, css, javascript_angularjs
+html, css, javascript
+<br>
+angularjs app
 <br>
 vscode
