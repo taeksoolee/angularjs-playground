@@ -1,6 +1,4 @@
-# Todo-list / https://taeksoolee.github.io/todolist/.
-html, css, javascript
-<br>
-angularjs app
-<br>
-vscode
+# angular-todolist
+  **angularJS 튜토리얼 프로젝트**
+  - google 로컬스토리지 사용
+
