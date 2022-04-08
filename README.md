@@ -3,51 +3,100 @@
   - google 로컬스토리지 사용
 
 
-
 ## Module
----
-ng-app="moduleName"
+* angularjs의 기본적인 기능 단위
+``` html
+	<script type="text/javascript">
+		const module = angular.module('module-name', []);
+	</script>
+	<div ng-app="my-app">
+		<div ng-init="key: value">
+			<!-- angular js template syntax -->
+			{{key}}
+		</div>
+	</div>
+```
+
+## Controller
+* module에 정의하여 사용 가능하다.
+* 관습적으로 컨트롤러의 이름의 첫글자는 대문자로 사용한다.
+* controller는 각각의 $scope 변수를 가지며,  service, directive, filter 등을 주입받아 사용한다.
+``` javascript
+	angularModule
+		.controller(
+			'TodoCtrl',
+			[$scope, service, filter, 
+				function($scope, service, filter) {
+					$scope.title = 'hello, angular js';
+					
+					$scoper.alert = () => {
+						alert($scope.title);
+					}
+				}
+			],
+		)
+```
+
+``` html
+	<div ng-app="module-name">
+		<div ng-controller="TodoCtrl">
+			<h1>{{title}}</h1>
+			<button ng-click="alert()">alert</button>
+		</div>
+	</div>
+```
 
 
-ng-init="name: value" 형식으로 태그에 저장함
-	{{ name }} 형식으로 name의 value를 가져올수 있음
-	{{name | filter}} >> 형식으로 필터사용가능
-		* date : "yyyy-MM-dd hh:mm:ss"
-___________________________________________________________________________________
-ng-show="조건" 조건이 참인경우에만 해당 block-model을 보여줌
-___________________________________________________________________________________
-ng-repeat="moduleName in $scopeVar(inited in controller)" : controller에서 정의된 변수가 배열일 경우 반복처리함.
-							| filter : statusFilter
-___________________________________________________________________________________
-ng-submit="func(var)" : 폼이 submit할때 실행되는 함수(서비스/$scope에 저장되어 있는 함수) 저장
-ng-model ="var" : 서비스/$scope에 저장되어있는 변수를 사용하여 value로 사용함.
-ng-click="angular statement" // input태그가 클릭될때 사용될 명령저장
-ng-blur="angular statement" // input태그
-___________________________________________________________________________________
-	// 관습적으로 컨트롤러의 이름의 첫글자는 대문자로 사용함.
-	angular.module("moduleName").controller("ControllerName", ["$scope", "serviceName", function($scope, serviceName){
-		$scope.var = serviceName.var; // 서비스에서 변수를 제공받아 스코프에 저장
-		
-		$scope.func = func	tion(arg1){
-			serviceName.func1(arg1); // 데이터를 관리하는 함수를 서비스에서 제공받음
-			$scope.directiveName = ""; // 디렉티브를 컨트롤하는 부분 정의
-		};	
-	]});
-___________________________________________________________________________________
-	angular.module("moduleName").directive("directiveName", function(){
+## Directive : 지시자
+`ng-show="boolVal"` : 조건이 참인경우에만 해당 block-model을 보여줌
+`ng-repeat="item in list"` : scope 내 변수를 반복 렌더링 할때 사용
+	`ng-repeat="item in list" : 사용시`
+### template 정의
+``` javascript
+	angularModule.directive("myTemplate", function(){
 		retrun{
-			"template": "html contents";
-			"templateUrl": "template.html"; // tempate를 url로 지정
+			"template": "<div>템플릿을 정의한다.</div>";
+			// or "templateUrl": "./template.html";
 		}
 	});
->> <directive-name></directive-name>: directive tag 사용가능
-___________________________________________________________________________________
-	service(), factory(), provider()
-	 * localStorage // 저장되는 모든 데이터는 string으로 저장됨(cookie와 같음)
-		.getItem("itemName") : itemName의 값을 string으로 반환. // 반환받아 JSON.parse 함수로 JSON으로 변환하여 object 객체로 변수에 저장할것
- 		.setItem("itemName", JSON_Data) : itemname의 값을 JSON_Data로 세팅(바꿔줌. 덮어쓰기) // 일반적으로 변수의 저장된 함수값은 JSON형식 이므로 저장하기전에 JSON.stringify 함수로 string으로 변환하여 localStorage에 저장할것
+```
+``` html
+	<my-template></my-template>
+```
 
-	angular.module("douleName").factory("servieName[storage]", function(){
+## form
+### formData Binding
+`ng-model="scopeVal"` : $scope에 정의된 변수와 property를 양방향 바인딩
+
+
+## event binding
+`ng-click="myFunc()"` : scope에 정의된 변수를 호출. 콜백에 아니라 표현식으로 사용
+`ng-blur="myFunc()"`
+
+## Filter
+### angular 정의 filter
+``` html
+<!--  -->
+	<div>{{registedDate | date: 'yyyy-MM-dd hh:mm:ss'}}</div>
+<!-- repeat filter : item에 filter와 같은 이름의 key의 falsly를 확인하여 필터링 -->
+	<div ng-repeat="item in list | completed"></div>
+	<!-- list = [{title: 'a', completed: true}, {title: 'b', completed: false}]-->
+	<!-- complted = {completed: true} -->
+	<!-- completed가 true인 객체만 필터링한다. 
+
+```
+
+### custom filter
+```
+	angular.filter
+```
+
+## Services
+service, factory, provider <- 다음의 3가지 방법으로 제공 가능하다.
+
+### Factory
+``` javascript
+	angularModule.factory("servieName[storage]", function(){
 		var storage1 = {
 			varData: [],
 			funcData: function(data){
@@ -59,4 +108,4 @@ ________________________________________________________________________________
 			}
 		}
 	})
-_____________________________________________________________________________________
+```
