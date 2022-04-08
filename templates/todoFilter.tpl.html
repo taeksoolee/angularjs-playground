@@ -1,0 +1,13 @@
+<div class="inputgroup-btn">
+  <button class="btn btn-primary" 
+    ng-click="statusFilter={completed:true}"
+  >Completed</button>
+  <button class="btn btn-primary" 
+    ng-click="statusFilter={completed:false}"
+  >Action</button>
+  <button class="btn btn-primary" 
+    ng-click="statusFilter={}"
+  >All</button>
+</div>
+
+<div>statusFilter : {{statusFilter}}</div>
